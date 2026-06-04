@@ -1,840 +1,150 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8" />
-  <title>RakiSelling Next Gen</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <style>
-    :root {
-      --bg: #020617;
-      --accent: #22c55e;
-      --accent-soft: rgba(34, 197, 94, 0.2);
-      --text: #e5e7eb;
-      --muted: #6b7280;
-      --card: rgba(15, 23, 42, 0.85);
-      --border: rgba(148, 163, 184, 0.25);
-      --danger: #f97316;
-      --danger-soft: rgba(249, 115, 22, 0.15);
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
-        "Segoe UI", sans-serif;
-    }
-
-    body {
-      background: radial-gradient(circle at top, #0f172a 0, #020617 55%, #000 100%);
-      color: var(--text);
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
-
-    /* Hintergrund-Glows */
-    .bg-orb {
-      position: fixed;
-      width: 420px;
-      height: 420px;
-      border-radius: 999px;
-      filter: blur(80px);
-      opacity: 0.5;
-      z-index: -1;
-      mix-blend-mode: screen;
-    }
-    .bg-orb.green {
-      background: #22c55e;
-      top: -80px;
-      left: -40px;
-    }
-    .bg-orb.orange {
-      background: #f97316;
-      bottom: -120px;
-      right: -40px;
-    }
-
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      backdrop-filter: blur(18px);
-      background: linear-gradient(
-        to bottom,
-        rgba(15, 23, 42, 0.9),
-        rgba(15, 23, 42, 0.4),
-        transparent
-      );
-      border-bottom: 1px solid rgba(148, 163, 184, 0.25);
-    }
-
-    .nav {
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 14px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      font-size: 0.9rem;
-    }
-
-    .logo-mark {
-      width: 26px;
-      height: 26px;
-      border-radius: 999px;
-      background: radial-gradient(circle at 30% 20%, #bbf7d0, #22c55e 45%, #16a34a 100%);
-      box-shadow: 0 0 24px rgba(34, 197, 94, 0.8);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .logo-mark::after {
-      content: "";
-      position: absolute;
-      inset: 4px;
-      border-radius: inherit;
-      border: 2px solid rgba(15, 23, 42, 0.9);
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 18px;
-      font-size: 0.9rem;
-      color: var(--muted);
-    }
-
-    .nav-links a {
-      text-decoration: none;
-      color: inherit;
-      position: relative;
-      padding-bottom: 2px;
-      cursor: pointer;
-    }
-
-    .nav-links a::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 0;
-      height: 1px;
-      background: linear-gradient(to right, var(--accent), var(--danger));
-      transition: width 0.2s ease-out;
-    }
-
-    .nav-links a:hover::after {
-      width: 100%;
-    }
-
-    .nav-cta {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .pill {
-      font-size: 0.75rem;
-      padding: 4px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.4);
-      color: var(--muted);
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .pill-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 999px;
-      background: var(--accent);
-      box-shadow: 0 0 10px rgba(34, 197, 94, 0.9);
-    }
-
-    .btn-primary {
-      padding: 7px 16px;
-      border-radius: 999px;
-      border: none;
-      background: linear-gradient(135deg, #22c55e, #16a34a);
-      color: #020617;
-      font-size: 0.85rem;
-      font-weight: 600;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      box-shadow: 0 0 24px rgba(34, 197, 94, 0.5);
-      transition: transform 0.12s ease-out, box-shadow 0.12s ease-out;
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 0 32px rgba(34, 197, 94, 0.7);
-    }
-
-    main {
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 40px 20px 80px;
-    }
-
-    .hero {
-      display: grid;
-      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
-      gap: 32px;
-      align-items: center;
-      margin-top: 20px;
-    }
-
-    @media (max-width: 900px) {
-      .hero {
-        grid-template-columns: minmax(0, 1fr);
-      }
-      .nav-links {
-        display: none;
-      }
-    }
-
-    .hero-kicker {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 4px 10px 4px 4px;
-      border-radius: 999px;
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(148, 163, 184, 0.4);
-      font-size: 0.75rem;
-      color: var(--muted);
-      margin-bottom: 14px;
-    }
-
-    .hero-kicker span {
-      padding: 3px 8px;
-      border-radius: 999px;
-      background: rgba(34, 197, 94, 0.12);
-      color: #bbf7d0;
-      font-weight: 500;
-    }
-
-    .hero-title {
-      font-size: clamp(2.4rem, 4vw, 3.2rem);
-      line-height: 1.05;
-      letter-spacing: -0.04em;
-      margin-bottom: 12px;
-    }
-
-    .hero-title span {
-      background: linear-gradient(120deg, #22c55e, #a3e635, #f97316);
-      -webkit-background-clip: text;
-      color: transparent;
-    }
-
-    .hero-sub {
-      color: var(--muted);
-      font-size: 0.98rem;
-      max-width: 460px;
-      margin-bottom: 18px;
-    }
-
-    .hero-metrics {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 18px;
-      margin-bottom: 22px;
-    }
-
-    .metric {
-      min-width: 110px;
-    }
-
-    .metric-label {
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--muted);
-      margin-bottom: 4px;
-    }
-
-    .metric-value {
-      font-size: 1.1rem;
-      font-weight: 600;
-    }
-
-    .metric-value span {
-      font-size: 0.8rem;
-      color: var(--muted);
-      margin-left: 4px;
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      align-items: center;
-      margin-bottom: 18px;
-    }
-
-    .btn-ghost {
-      padding: 7px 14px;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.5);
-      background: rgba(15, 23, 42, 0.9);
-      color: var(--muted);
-      font-size: 0.85rem;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .hero-note {
-      font-size: 0.75rem;
-      color: var(--muted);
-    }
-
-    .hero-note strong {
-      color: #e5e7eb;
-      font-weight: 500;
-    }
-
-    /* Right side: Card */
-    .hero-card {
-      position: relative;
-    }
-
-    .card {
-      border-radius: 22px;
-      background: radial-gradient(circle at top left, rgba(34, 197, 94, 0.18), transparent 55%),
-        radial-gradient(circle at bottom right, rgba(249, 115, 22, 0.18), transparent 55%),
-        var(--card);
-      border: 1px solid var(--border);
-      padding: 18px 18px 16px;
-      box-shadow: 0 24px 80px rgba(15, 23, 42, 0.9);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .card-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 12px;
-    }
-
-    .card-title {
-      font-size: 0.9rem;
-      font-weight: 500;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .card-title-dot {
-      width: 9px;
-      height: 9px;
-      border-radius: 999px;
-      background: var(--accent);
-      box-shadow: 0 0 12px rgba(34, 197, 94, 0.9);
-    }
-
-    .card-tag {
-      font-size: 0.7rem;
-      padding: 3px 8px;
-      border-radius: 999px;
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(148, 163, 184, 0.5);
-      color: var(--muted);
-    }
-
-    .card-main {
-      display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
-      gap: 14px;
-      align-items: flex-start;
-    }
-
-    @media (max-width: 600px) {
-      .card-main {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
-
-    .code-block {
-      font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco,
-        Consolas, "Liberation Mono", "Courier New", monospace;
-      font-size: 0.7rem;
-      background: rgba(15, 23, 42, 0.95);
-      border-radius: 14px;
-      border: 1px solid rgba(30, 64, 175, 0.7);
-      padding: 10px 10px 9px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .code-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 6px;
-      color: var(--muted);
-      font-size: 0.65rem;
-    }
-
-    .code-dots {
-      display: flex;
-      gap: 4px;
-    }
-
-    .code-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 999px;
-      background: #ef4444;
-    }
-
-    .code-dot:nth-child(2) {
-      background: #facc15;
-    }
-
-    .code-dot:nth-child(3) {
-      background: #22c55e;
-    }
-
-    pre {
-      white-space: pre;
-      overflow-x: auto;
-      padding-top: 4px;
-    }
-
-    .code-keyword {
-      color: #60a5fa;
-    }
-
-    .code-func {
-      color: #a5b4fc;
-    }
-
-    .code-string {
-      color: #f97316;
-    }
-
-    .code-comment {
-      color: #6b7280;
-    }
-
-    .card-stats {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      font-size: 0.78rem;
-    }
-
-    .stat-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 7px 9px;
-      border-radius: 10px;
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(148, 163, 184, 0.4);
-    }
-
-    .stat-label {
-      color: var(--muted);
-    }
-
-    .stat-value {
-      font-weight: 500;
-    }
-
-    .stat-pill {
-      padding: 2px 7px;
-      border-radius: 999px;
-      font-size: 0.7rem;
-      background: var(--accent-soft);
-      color: #bbf7d0;
-    }
-
-    .stat-pill.danger {
-      background: var(--danger-soft);
-      color: #fed7aa;
-    }
-
-    .card-footer {
-      margin-top: 10px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 0.7rem;
-      color: var(--muted);
-    }
-
-    .card-footer span {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .pulse-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 999px;
-      background: var(--accent);
-      box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
-      animation: pulse 1.6s infinite;
-    }
-
-    @keyframes pulse {
-      0% {
-        box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
-      }
-      70% {
-        box-shadow: 0 0 0 10px rgba(34, 197, 94, 0);
-      }
-      100% {
-        box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
-      }
-    }
-
-    /* Sektion: Features */
-    .section {
-      margin-top: 60px;
-    }
-
-    .section-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      margin-bottom: 18px;
-      gap: 16px;
-    }
-
-    .section-title {
-      font-size: 1.1rem;
-      font-weight: 500;
-    }
-
-    .section-sub {
-      font-size: 0.85rem;
-      color: var(--muted);
-      max-width: 360px;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 16px;
-    }
-
-    @media (max-width: 900px) {
-      .grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-    }
-
-    @media (max-width: 640px) {
-      .grid {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
-
-    .feature-card {
-      border-radius: 16px;
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(148, 163, 184, 0.4);
-      padding: 12px 12px 11px;
-      font-size: 0.8rem;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .feature-icon {
-      width: 26px;
-      height: 26px;
-      border-radius: 999px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.9rem;
-      margin-bottom: 8px;
-      background: rgba(34, 197, 94, 0.12);
-      color: #bbf7d0;
-    }
-
-    .feature-title {
-      font-weight: 500;
-      margin-bottom: 4px;
-    }
-
-    .feature-text {
-      color: var(--muted);
-      margin-bottom: 8px;
-    }
-
-    .feature-tag {
-      font-size: 0.7rem;
-      color: var(--muted);
-    }
-
-    /* Footer */
-    footer {
-      border-top: 1px solid rgba(31, 41, 55, 0.9);
-      margin-top: 60px;
-      padding-top: 18px;
-      font-size: 0.75rem;
-      color: var(--muted);
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    footer a {
-      color: var(--muted);
-      text-decoration: none;
-    }
-
-    footer a:hover {
-      color: var(--accent);
-    }
-  </style>
+<meta charset="UTF-8">
+<title>Mein Shop</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #0a0a0a;
+  color: white;
+}
+header {
+  padding: 20px;
+  background: #111;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #222;
+}
+.logo {
+  font-size: 22px;
+  font-weight: bold;
+  color: #00ff88;
+}
+nav a {
+  margin-left: 20px;
+  color: #ccc;
+  text-decoration: none;
+}
+.hero {
+  padding: 60px 20px;
+  text-align: center;
+  background: linear-gradient(135deg, #00ff88, #0077ff);
+  color: black;
+}
+.hero h1 {
+  font-size: 40px;
+  margin-bottom: 10px;
+}
+.container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 20px;
+}
+.products {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+.product {
+  background: #111;
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid #222;
+  transition: 0.2s;
+}
+.product:hover {
+  transform: translateY(-4px);
+  border-color: #00ff88;
+}
+.product img {
+  width: 100%;
+  border-radius: 10px;
+}
+.product h3 {
+  margin: 10px 0 5px;
+}
+.price {
+  color: #00ff88;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+.buy-btn {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background: #00ff88;
+  color: black;
+  text-align: center;
+  border-radius: 8px;
+  font-weight: bold;
+  text-decoration: none;
+}
+.buy-btn:hover {
+  background: #00cc66;
+}
+footer {
+  text-align: center;
+  padding: 20px;
+  margin-top: 40px;
+  border-top: 1px solid #222;
+  color: #777;
+}
+</style>
 </head>
 <body>
-  <div class="bg-orb green"></div>
-  <div class="bg-orb orange"></div>
 
-  <header>
-    <nav class="nav">
-      <div class="logo">
-        <div class="logo-mark"></div>
-        <span>RAKISELLING</span>
-      </div>
-      <div class="nav-links">
-        <a onclick="scrollToSection('features')">Features</a>
-        <a onclick="scrollToSection('stats')">Stats</a>
-        <a onclick="scrollToSection('code')">Code</a>
-      </div>
-      <div class="nav-cta">
-        <div class="pill">
-          <span class="pill-dot"></span>
-          Live on GitHub
-        </div>
-        <button class="btn-primary" onclick="scrollToSection('code')">
-          View Source
-          <span>↗</span>
-        </button>
-      </div>
-    </nav>
-  </header>
+<header>
+  <div class="logo">MEIN SHOP</div>
+  <nav>
+    <a href="#products">Produkte</a>
+    <a href="#kontakt">Kontakt</a>
+  </nav>
+</header>
 
-  <main>
-    <section class="hero">
-      <div>
-        <div class="hero-kicker">
-          <span>v2.0</span>
-          Full‑Stack Selling Experience
-        </div>
-        <h1 class="hero-title">
-          Baue dein eigenes <span>High‑End</span>  
-          Selling‑Empire.
-        </h1>
-        <p class="hero-sub">
-          Eine minimalistische, aber extrem moderne Landingpage – perfekt für GitHub Pages,
-          um dein Projekt, deine Tools oder deinen Shop zu präsentieren.
-        </p>
+<section class="hero">
+  <h1>Willkommen in meinem Shop</h1>
+  <p>Digitale Produkte, Tools, Services – alles an einem Ort.</p>
+</section>
 
-        <div class="hero-metrics">
-          <div class="metric">
-            <div class="metric-label">Deploy‑Time</div>
-            <div class="metric-value">60s<span>avg</span></div>
-          </div>
-          <div class="metric">
-            <div class="metric-label">Lines of Code</div>
-            <div class="metric-value">~300<span>clean</span></div>
-          </div>
-          <div class="metric">
-            <div class="metric-label">Flex Level</div>
-            <div class="metric-value">∞<span>custom</span></div>
-          </div>
-        </div>
+<div class="container" id="products">
+  <h2>Produkte</h2>
+  <div class="products">
 
-        <div class="hero-actions">
-          <button class="btn-primary" onclick="scrollToSection('features')">
-            Starte jetzt
-            <span>⚡</span>
-          </button>
-          <button class="btn-ghost" onclick="scrollToSection('stats')">
-            Live‑Stats ansehen
-          </button>
-        </div>
+    <!-- Produkt 1 -->
+    <div class="product">
+      <img src="https://via.placeholder.com/300x200" alt="Produkt">
+      <h3>Premium Tool</h3>
+      <p class="price">19.99€</p>
+      <a class="buy-btn" href="https://dein-link-hier" target="_blank">Jetzt kaufen</a>
+    </div>
 
-        <p class="hero-note">
-          <strong>Hinweis:</strong> Einfach diese Datei als <code>index.html</code> in dein GitHub‑Repo legen
-          und GitHub Pages aktivieren.
-        </p>
-      </div>
+    <!-- Produkt 2 -->
+    <div class="product">
+      <img src="https://via.placeholder.com/300x200" alt="Produkt">
+      <h3>VIP Zugang</h3>
+      <p class="price">9.99€</p>
+      <a class="buy-btn" href="https://dein-link-hier" target="_blank">Jetzt kaufen</a>
+    </div>
 
-      <div class="hero-card" id="code">
-        <div class="card">
-          <div class="card-header">
-            <div class="card-title">
-              <span class="card-title-dot"></span>
-              live‑preview.js
-            </div>
-            <div class="card-tag">Preview • Read‑only</div>
-          </div>
+    <!-- Produkt 3 -->
+    <div class="product">
+      <img src="https://via.placeholder.com/300x200" alt="Produkt">
+      <h3>Script / Bot</h3>
+      <p class="price">14.99€</p>
+      <a class="buy-btn" href="https://dein-link-hier" target="_blank">Jetzt kaufen</a>
+    </div>
 
-          <div class="card-main">
-            <div class="code-block">
-              <div class="code-header">
-                <div class="code-dots">
-                  <span class="code-dot"></span>
-                  <span class="code-dot"></span>
-                  <span class="code-dot"></span>
-                </div>
-                <span>rakiselling/preview</span>
-              </div>
-              <pre><span class="code-comment">// minimal deploy script</span>
-<span class="code-keyword">async</span> <span class="code-func">deploy</span>() {
-  <span class="code-keyword">const</span> repo = <span class="code-string">'github.com/DEINNAME/rakiselling'</span>;
-  <span class="code-keyword">await</span> <span class="code-func">push</span>(repo, <span class="code-string">'index.html'</span>);
-  <span class="code-func">enablePages</span>(repo, { branch: <span class="code-string">'main'</span> });
-  <span class="code-func">log</span>(<span class="code-string">'🚀 Live in under 60 seconds.'</span>);
-}</pre>
-            </div>
+  </div>
+</div>
 
-            <div class="card-stats" id="stats">
-              <div class="stat-row">
-                <span class="stat-label">Status</span>
-                <span class="stat-value">
-                  <span class="pulse-dot"></span> Online
-                </span>
-              </div>
-              <div class="stat-row">
-                <span class="stat-label">Performance</span>
-                <span class="stat-pill">Lighthouse 98+</span>
-              </div>
-              <div class="stat-row">
-                <span class="stat-label">Security</span>
-                <span class="stat-pill danger">Static • No Backend</span>
-              </div>
-              <div class="stat-row">
-                <span class="stat-label">Theme</span>
-                <span class="stat-value">Dark • Neon Green</span>
-              </div>
-            </div>
-          </div>
+<footer id="kontakt">
+  <p>Kontakt: deinname@deinshop.de</p>
+  <p>© 2024 Mein Shop</p>
+</footer>
 
-          <div class="card-footer">
-            <span>
-              <span class="pill-dot"></span>
-              Auto‑refresh every 5s
-            </span>
-            <span>Powered by HTML • CSS • JS</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="features">
-      <div class="section-header">
-        <h2 class="section-title">Features, die ballern.</h2>
-        <p class="section-sub">
-          Alles ist in einer einzigen Datei – perfekt zum Kopieren, Anpassen und direkt auf GitHub
-          zu deployen. Keine Abhängigkeiten, kein Build‑Step.
-        </p>
-      </div>
-
-      <div class="grid">
-        <div class="feature-card">
-          <div class="feature-icon">⚡</div>
-          <div class="feature-title">Ultra‑schnell</div>
-          <p class="feature-text">
-            Reines HTML/CSS/JS, komplett statisch. Läuft auf GitHub Pages, Vercel, Netlify oder
-            jedem x‑beliebigen Hoster.
-          </p>
-          <div class="feature-tag">0 ms Server‑Response</div>
-        </div>
-
-        <div class="feature-card">
-          <div class="feature-icon">🎨</div>
-          <div class="feature-title">Modernes Design</div>
-          <p class="feature-text">
-            Dark‑Mode, Neon‑Glows, Glassmorphism‑Cards und smoothes Layout – inspiriert von
-            High‑End SaaS‑Landingpages.
-          </p>
-          <div class="feature-tag">Tailwind‑Vibes, aber ohne Tailwind</div>
-        </div>
-
-        <div class="feature-card">
-          <div class="feature-icon">🧩</div>
-          <div class="feature-title">Einfach anpassbar</div>
-          <p class="feature-text">
-            Ändere Farben, Texte, Icons und Links direkt im Code. Kein Framework, kein Lock‑in.
-          </p>
-          <div class="feature-tag">Perfekt zum Lernen & Flexen</div>
-        </div>
-
-        <div class="feature-card">
-          <div class="feature-icon">📈</div>
-          <div class="feature-title">Verkaufs‑Ready</div>
-          <p class="feature-text">
-            Nutze die Sektionen für Angebote, Preise, Discord‑Links oder was auch immer du
-            verkaufen willst.
-          </p>
-          <div class="feature-tag">CTA‑optimiert</div>
-        </div>
-
-        <div class="feature-card">
-          <div class="feature-icon">🔐</div>
-          <div class="feature-title">Sicher & simpel</div>
-          <p class="feature-text">
-            Kein Backend, keine Datenbank, keine Logins. Weniger Angriffsfläche, weniger Stress.
-          </p>
-          <div class="feature-tag">Static‑First‑Approach</div>
-        </div>
-
-        <div class="feature-card">
-          <div class="feature-icon">🚀</div>
-          <div class="feature-title">GitHub‑optimiert</div>
-          <p class="feature-text">
-            Designt, um direkt in ein GitHub‑Repo zu droppen. Ideal als Portfolio, Tool‑Hub oder
-            Landingpage.
-          </p>
-          <div class="feature-tag">Made for GitHub Pages</div>
-        </div>
-      </div>
-    </section>
-
-    <footer>
-      <span>© <span id="year"></span> RakiSelling • Custom Landing</span>
-      <span>
-        Built for
-        <a href="https://pages.github.com/" target="_blank" rel="noreferrer">
-          GitHub Pages
-        </a>
-      </span>
-    </footer>
-  </main>
-
-  <script>
-    function scrollToSection(id) {
-      const el = document.getElementById(id);
-      if (!el) return;
-      el.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
 </body>
 </html>
