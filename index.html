@@ -1,150 +1,227 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-<meta charset="UTF-8">
-<title>Mein Shop</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<style>
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #0a0a0a;
-  color: white;
-}
-header {
-  padding: 20px;
-  background: #111;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid #222;
-}
-.logo {
-  font-size: 22px;
-  font-weight: bold;
-  color: #00ff88;
-}
-nav a {
-  margin-left: 20px;
-  color: #ccc;
-  text-decoration: none;
-}
-.hero {
-  padding: 60px 20px;
-  text-align: center;
-  background: linear-gradient(135deg, #00ff88, #0077ff);
-  color: black;
-}
-.hero h1 {
-  font-size: 40px;
-  margin-bottom: 10px;
-}
-.container {
-  max-width: 1100px;
-  margin: auto;
-  padding: 20px;
-}
-.products {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 20px;
-}
-.product {
-  background: #111;
-  padding: 20px;
-  border-radius: 12px;
-  border: 1px solid #222;
-  transition: 0.2s;
-}
-.product:hover {
-  transform: translateY(-4px);
-  border-color: #00ff88;
-}
-.product img {
-  width: 100%;
-  border-radius: 10px;
-}
-.product h3 {
-  margin: 10px 0 5px;
-}
-.price {
-  color: #00ff88;
-  font-size: 20px;
-  margin-bottom: 10px;
-}
-.buy-btn {
-  display: block;
-  width: 100%;
-  padding: 10px;
-  background: #00ff88;
-  color: black;
-  text-align: center;
-  border-radius: 8px;
-  font-weight: bold;
-  text-decoration: none;
-}
-.buy-btn:hover {
-  background: #00cc66;
-}
-footer {
-  text-align: center;
-  padding: 20px;
-  margin-top: 40px;
-  border-top: 1px solid #222;
-  color: #777;
-}
-</style>
+  <meta charset="UTF-8" />
+  <title>Shop‑Website zu verkaufen</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #050509;
+      --bg-alt: #0b0b12;
+      --accent: #7b5cff;
+      --accent2: #ff7ad9;
+      --text: #f5f5f7;
+      --muted: #9b9bb3;
+      --radius: 14px;
+      --shadow: 0 18px 45px rgba(0,0,0,0.55);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: system-ui, sans-serif;
+      background: radial-gradient(circle at top, #151528 0%, #050509 60%);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    .page {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 24px 18px 60px;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 40px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-mark {
+      width: 36px;
+      height: 36px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: 0 0 20px rgba(123,92,255,0.7);
+    }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      margin-left: 14px;
+      font-size: 0.9rem;
+      transition: 0.2s;
+    }
+
+    nav a:hover {
+      color: var(--text);
+    }
+
+    .nav-cta {
+      padding: 8px 16px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: white;
+      font-weight: 600;
+      margin-left: 20px;
+      box-shadow: 0 10px 25px rgba(123,92,255,0.6);
+    }
+
+    .hero {
+      padding: 30px;
+      border-radius: 22px;
+      background: linear-gradient(145deg, #0b0b12, #050509);
+      box-shadow: var(--shadow);
+      margin-bottom: 40px;
+    }
+
+    .hero h1 {
+      font-size: 2.3rem;
+      margin-bottom: 12px;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero p {
+      color: var(--muted);
+      max-width: 500px;
+      margin-bottom: 20px;
+      font-size: 1rem;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: 0.2s;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: white;
+      box-shadow: 0 12px 30px rgba(123,92,255,0.7);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+    }
+
+    .section {
+      margin-top: 40px;
+    }
+
+    .card {
+      padding: 20px;
+      border-radius: 18px;
+      background: linear-gradient(145deg, #0b0b12, #050509);
+      box-shadow: var(--shadow);
+      margin-bottom: 20px;
+    }
+
+    .card h2 {
+      margin-bottom: 10px;
+      font-size: 1.3rem;
+    }
+
+    .card p {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    footer {
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      color: var(--muted);
+      font-size: 0.8rem;
+      display: flex;
+      justify-content: space-between;
+    }
+  </style>
 </head>
 <body>
 
-<header>
-  <div class="logo">MEIN SHOP</div>
-  <nav>
-    <a href="#products">Produkte</a>
-    <a href="#kontakt">Kontakt</a>
-  </nav>
-</header>
+  <div class="page">
 
-<section class="hero">
-  <h1>Willkommen in meinem Shop</h1>
-  <p>Digitale Produkte, Tools, Services – alles an einem Ort.</p>
-</section>
+    <header>
+      <div class="logo">
+        <div class="logo-mark"></div>
+        <div>
+          <strong>PROJEX TEMPLATE</strong><br>
+          <span style="font-size:0.8rem;color:var(--muted);">Komplette Website zu verkaufen</span>
+        </div>
+      </div>
 
-<div class="container" id="products">
-  <h2>Produkte</h2>
-  <div class="products">
+      <nav>
+        <a href="#info">Infos</a>
+        <a href="#kaufen" class="nav-cta">Website kaufen</a>
+      </nav>
+    </header>
 
-    <!-- Produkt 1 -->
-    <div class="product">
-      <img src="https://via.placeholder.com/300x200" alt="Produkt">
-      <h3>Premium Tool</h3>
-      <p class="price">19.99€</p>
-      <a class="buy-btn" href="https://dein-link-hier" target="_blank">Jetzt kaufen</a>
-    </div>
+    <section class="hero">
+      <h1>Diese <span>Shop‑Website</span> steht zum Verkauf</h1>
+      <p>Modernes, responsives Template. Perfekt für digitale Produkte, Services oder eigene Projekte. Einmal kaufen, komplett nutzen.</p>
 
-    <!-- Produkt 2 -->
-    <div class="product">
-      <img src="https://via.placeholder.com/300x200" alt="Produkt">
-      <h3>VIP Zugang</h3>
-      <p class="price">9.99€</p>
-      <a class="buy-btn" href="https://dein-link-hier" target="_blank">Jetzt kaufen</a>
-    </div>
+      <button class="btn btn-primary"
+              onclick="window.open('https://discord.gg/f3sG9ZFzmX', '_blank')">
+        Support / Kaufanfrage (Discord)
+      </button>
+    </section>
 
-    <!-- Produkt 3 -->
-    <div class="product">
-      <img src="https://via.placeholder.com/300x200" alt="Produkt">
-      <h3>Script / Bot</h3>
-      <p class="price">14.99€</p>
-      <a class="buy-btn" href="https://dein-link-hier" target="_blank">Jetzt kaufen</a>
-    </div>
+    <section id="info" class="section">
+      <div class="card">
+        <h2>Was du bekommst</h2>
+        <p>
+          • Kompletten HTML/CSS‑Code<br>
+          • Modernes Dark‑Design<br>
+          • Mobile‑optimiert<br>
+          • Leicht anpassbar<br>
+          • Sofort einsatzbereit
+        </p>
+      </div>
+
+      <div class="card">
+        <h2>Preis</h2>
+        <p>Preis wird individuell abgesprochen. Schreib mich einfach auf Discord an.</p>
+      </div>
+    </section>
+
+    <section id="kaufen" class="section">
+      <div class="card">
+        <h2>Website kaufen</h2>
+        <p>Für Kauf, Fragen oder Support einfach meinem Discord beitreten.</p>
+
+        <button class="btn btn-primary"
+                onclick="window.open('https://discord.gg/f3sG9ZFzmX', '_blank')">
+          Discord beitreten
+        </button>
+      </div>
+    </section>
+
+    <footer>
+      <span>© <span id="year"></span> Projex Template</span>
+      <span>Kontakt über Discord</span>
+    </footer>
 
   </div>
-</div>
 
-<footer id="kontakt">
-  <p>Kontakt: deinname@deinshop.de</p>
-  <p>© 2024 Mein Shop</p>
-</footer>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 
 </body>
 </html>
