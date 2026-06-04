@@ -1,25 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>QZMarket</title>
 <style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,sans-serif;
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
 body{
-background:#0a0a0a;
+background:#0b0b0b;
 color:white;
 }
-nav{
+header{
+padding:20px 8%;
 display:flex;
 justify-content:space-between;
 align-items:center;
-padding:25px 8%;
 border-bottom:1px solid #222;
 }
 .logo{
@@ -27,141 +22,150 @@ font-size:32px;
 font-weight:bold;
 color:#8a2be2;
 }
-nav ul{
-display:flex;
-gap:30px;
-list-style:none;
-}
 nav a{
 color:white;
 text-decoration:none;
+margin-left:20px;
 }
 .hero{
 text-align:center;
-padding:120px 20px;
+padding:100px 20px;
 }
 .hero h1{
 font-size:70px;
-margin-bottom:20px;
+margin-bottom:15px;
 }
 .hero p{
-font-size:22px;
 color:#aaa;
-margin-bottom:35px;
+font-size:20px;
+margin-bottom:30px;
 }
-.discord-btn{
+.btn{
 background:#8a2be2;
+padding:15px 30px;
+border-radius:10px;
 color:white;
-padding:15px 35px;
-border-radius:12px;
 text-decoration:none;
-font-weight:bold;
 display:inline-block;
 }
-.products{
+.categories{
+padding:60px 8%;
+}
+.categories h2{
+text-align:center;
+margin-bottom:40px;
+}
+.grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:25px;
-padding:80px 10%;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
 }
 .card{
 background:#111;
-border:1px solid #2b2b2b;
-border-radius:20px;
-padding:30px;
-text-align:center;
+padding:25px;
+border-radius:15px;
+border:1px solid #222;
+cursor:pointer;
 transition:.3s;
 }
 .card:hover{
-transform:translateY(-8px);
 border-color:#8a2be2;
-box-shadow:0 0 25px rgba(138,43,226,.5);
+transform:translateY(-5px);
 }
 .card h3{
-font-size:24px;
-margin-bottom:20px;
+color:#8a2be2;
 }
-.card button{
-background:#8a2be2;
-color:white;
-border:none;
-padding:12px 25px;
+.faq{
+padding:60px 8%;
+}
+.faq-item{
+background:#111;
+padding:20px;
+border-radius:12px;
+margin-bottom:15px;
+}
+.support{
+text-align:center;
+padding:80px 20px;
+}
+.support a{
+background:#5865F2;
+padding:15px 30px;
 border-radius:10px;
-cursor:pointer;
+color:white;
+text-decoration:none;
+display:inline-block;
+margin-top:20px;
 }
 footer{
 text-align:center;
-padding:40px;
+padding:30px;
 color:#777;
-border-top:1px solid #222;
 }
 </style>
+<script>
+function openCategory(name){
+alert("Kategorie geöffnet: " + name);
+}
+</script>
 </head>
 <body>
-<nav>
+<header>
 <div class="logo">QZMarket</div>
-<ul>
-<li><a href="#">Home</a></li>
-<li><a href="#shop">Shop</a></li>
-<li><a href="https://discord.gg/7NKvmxuYHt">Support</a></li>
-</ul>
+<nav>
+<a href="#categories">Categories</a>
+<a href="#faq">FAQ</a>
+<a href="#support">Support</a>
 </nav>
+</header>
 <section class="hero">
 <h1>QZMarket</h1>
-<p>Digital Marketplace</p>
-<a class="discord-btn" href="https://discord.gg/7NKvmxuYHt">
+<p>Digital Marketplace & Community</p>
+<a class="btn" href="https://discord.gg/7NKvmxuYHt" target="_blank">
 Join Discord
 </a>
 </section>
-<section id="shop" class="products">
-<div class="card">
-<h3>Category 1</h3>
-<button>View</button>
+<section class="categories" id="categories">
+<h2>Categories</h2>
+<div class="grid">
+<div class="card" onclick="openCategory('Category 1')"><h3>Category 1</h3></div>
+<div class="card" onclick="openCategory('Category 2')"><h3>Category 2</h3></div>
+<div class="card" onclick="openCategory('Category 3')"><h3>Category 3</h3></div>
+<div class="card" onclick="openCategory('Category 4')"><h3>Category 4</h3></div>
+<div class="card" onclick="openCategory('Category 5')"><h3>Category 5</h3></div>
+<div class="card" onclick="openCategory('Category 6')"><h3>Category 6</h3></div>
+<div class="card" onclick="openCategory('Category 7')"><h3>Category 7</h3></div>
+<div class="card" onclick="openCategory('Category 8')"><h3>Category 8</h3></div>
+<div class="card" onclick="openCategory('Category 9')"><h3>Category 9</h3></div>
+<div class="card" onclick="openCategory('Category 10')"><h3>Category 10</h3></div>
+<div class="card" onclick="openCategory('Category 11')"><h3>Category 11</h3></div>
+<div class="card" onclick="openCategory('Category 12')"><h3>Category 12</h3></div>
+<div class="card" onclick="openCategory('Category 13')"><h3>Category 13</h3></div>
+<div class="card" onclick="openCategory('Category 14')"><h3>Category 14</h3></div>
+<div class="card" onclick="openCategory('Category 15')"><h3>Category 15</h3></div>
 </div>
-<div class="card">
-<h3>Category 2</h3>
-<button>View</button>
+</section>
+<section class="faq" id="faq">
+<h2>FAQ</h2>
+<div class="faq-item">
+<h3>How do I get support?</h3>
+<p>Create a ticket on Discord.</p>
 </div>
-<div class="card">
-<h3>Category 3</h3>
-<button>View</button>
+<div class="faq-item">
+<h3>Questions about products?</h3>
+<p>Open a ticket and our team will help you.</p>
 </div>
-<div class="card">
-<h3>Category 4</h3>
-<button>View</button>
+<div class="faq-item">
+<h3>Need assistance?</h3>
+<p>Join the Discord server and create a support ticket.</p>
 </div>
-<div class="card">
-<h3>Category 5</h3>
-<button>View</button>
-</div>
-<div class="card">
-<h3>Category 6</h3>
-<button>View</button>
-</div>
-<div class="card">
-<h3>Category 7</h3>
-<button>View</button>
-</div>
-<div class="card">
-<h3>Category 8</h3>
-<button>View</button>
-</div>
-<div class="card">
-<h3>Category 9</h3>
-<button>View</button>
-</div>
-<div class="card">
-<h3>Category 10</h3>
-<button>View</button>
-</div>
-<div class="card">
-<h3>Category 11</h3>
-<button>View</button>
-</div>
-<div class="card">
-<h3>Category 12</h3>
-<button>View</button>
-</div>
+</section>
+<section class="support" id="support">
+<h2>Support</h2>
+<p>For any questions, create a ticket in Discord.</p>
+<a href="https://discord.gg/7NKvmxuYHt" target="_blank">
+Open Discord
+</a>
 </section>
 <footer>
 © 2025 QZMarket
