@@ -3,37 +3,62 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>QZMarket</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
 <style>
+
 *{
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:Arial,sans-serif;
+font-family:'Poppins',sans-serif;
 }
+
 body{
 background:#050505;
 color:white;
+overflow-x:hidden;
 }
-nav{
+
+header{
 display:flex;
 justify-content:space-between;
 align-items:center;
-padding:25px 10%;
-border-bottom:1px solid #222;
+padding:25px 8%;
+position:fixed;
+width:100%;
+top:0;
+backdrop-filter:blur(10px);
+background:rgba(0,0,0,.4);
+border-bottom:1px solid rgba(255,255,255,.05);
+z-index:1000;
 }
+
 .logo{
 font-size:32px;
-font-weight:bold;
-color:#8a2be2;
+font-weight:800;
+background:linear-gradient(90deg,#7b2cff,#bb86fc);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
 }
+
 nav a{
 color:white;
 text-decoration:none;
-margin-left:20px;
+margin-left:30px;
+font-weight:500;
+transition:.3s;
 }
+
+nav a:hover{
+color:#bb86fc;
+}
+
 .hero{
-height:90vh;
+height:100vh;
 display:flex;
 flex-direction:column;
 justify-content:center;
@@ -41,77 +66,258 @@ align-items:center;
 text-align:center;
 padding:20px;
 }
+
 .hero h1{
-font-size:70px;
+font-size:80px;
 margin-bottom:15px;
 }
+
+.hero h1 span{
+color:#a855f7;
+}
+
 .hero p{
 font-size:22px;
-color:#aaa;
 max-width:700px;
-margin-bottom:30px;
+color:#bdbdbd;
+margin-bottom:35px;
 }
+
 .btn{
-background:#8a2be2;
+padding:16px 40px;
+border:none;
+border-radius:15px;
+background:#8b5cf6;
 color:white;
-padding:15px 35px;
-border-radius:12px;
-text-decoration:none;
-font-weight:bold;
+font-size:18px;
+font-weight:700;
+cursor:pointer;
+box-shadow:0 0 25px #8b5cf6;
+transition:.3s;
 }
-.features{
-padding:80px 10%;
+
+.btn:hover{
+transform:translateY(-3px);
+box-shadow:0 0 40px #8b5cf6;
+}
+
+.section{
+padding:120px 8%;
+}
+
+.title{
+text-align:center;
+font-size:42px;
+margin-bottom:60px;
+}
+
+.cards{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
 gap:25px;
 }
+
 .card{
+background:#111;
+border:1px solid rgba(255,255,255,.05);
+padding:30px;
+border-radius:20px;
+transition:.3s;
+}
+
+.card:hover{
+transform:translateY(-8px);
+border-color:#8b5cf6;
+}
+
+.card h3{
+margin-bottom:15px;
+font-size:24px;
+}
+
+.card p{
+color:#aaa;
+}
+
+.stats{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:25px;
+margin-top:40px;
+}
+
+.stat{
 background:#111;
 padding:30px;
 border-radius:20px;
-border:1px solid #222;
-}
-.card h3{
-color:#8a2be2;
-margin-bottom:10px;
-}
-footer{
 text-align:center;
-padding:40px;
-color:#666;
 }
+
+.stat h2{
+font-size:42px;
+color:#8b5cf6;
+}
+
+.discord{
+text-align:center;
+padding:120px 20px;
+}
+
+.discord a{
+display:inline-block;
+margin-top:20px;
+padding:15px 35px;
+background:#5865F2;
+color:white;
+text-decoration:none;
+border-radius:12px;
+font-weight:700;
+}
+
+footer{
+padding:40px;
+text-align:center;
+color:#777;
+border-top:1px solid rgba(255,255,255,.05);
+}
+
+.glow{
+position:fixed;
+width:500px;
+height:500px;
+background:#7b2cff;
+filter:blur(220px);
+opacity:.15;
+top:-150px;
+left:-150px;
+z-index:-1;
+}
+
+.glow2{
+position:fixed;
+width:500px;
+height:500px;
+background:#7b2cff;
+filter:blur(220px);
+opacity:.15;
+bottom:-150px;
+right:-150px;
+z-index:-1;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
 </style>
 </head>
+
 <body>
-<nav>
+
+<div class="glow"></div>
+<div class="glow2"></div>
+
+<header>
 <div class="logo">QZMarket</div>
-<div>
-<a href="#">Home</a>
-<a href="#">Products</a>
-<a href="#">Support</a>
-</div>
+
+<nav>
+<a href="#home">Home</a>
+<a href="#products">Products</a>
+<a href="#stats">Stats</a>
+<a href="#support">Support</a>
 </nav>
-<section class="hero">
-<h1>QZMarket</h1>
-<p>The next generation marketplace for digital products.</p>
-<a href="#" class="btn">Get Started</a>
+</header>
+
+<section class="hero" id="home">
+<h1>Welcome to <span>QZMarket</span></h1>
+
+<p>
+Premium Digital Marketplace.
+Fast Delivery • Secure Service • Modern Platform
+</p>
+
+<button class="btn"
+onclick="document.getElementById('products').scrollIntoView();">
+Explore
+</button>
+
 </section>
-<section class="features">
+
+<section class="section" id="products">
+
+<h2 class="title">Categories</h2>
+
+<div class="cards">
+
 <div class="card">
-<h3>Fast Trading</h3>
-<p>Buy and sell instantly.</p>
+<h3>🎮 Gaming</h3>
+<p>Gaming related digital products and services.</p>
 </div>
+
 <div class="card">
-<h3>Secure</h3>
-<p>Protected transactions and trusted sellers.</p>
+<h3>💻 Software</h3>
+<p>Premium software and digital solutions.</p>
 </div>
+
 <div class="card">
-<h3>24/7 Access</h3>
-<p>Trade whenever you want.</p>
+<h3>⚡ Services</h3>
+<p>Fast and reliable digital services.</p>
 </div>
+
+<div class="card">
+<h3>🌐 More</h3>
+<p>Additional products available through support.</p>
+</div>
+
+</div>
+
 </section>
+
+<section class="section" id="stats">
+
+<h2 class="title">QZMarket Stats</h2>
+
+<div class="stats">
+
+<div class="stat">
+<h2>24/7</h2>
+<p>Support</p>
+</div>
+
+<div class="stat">
+<h2>100%</h2>
+<p>Secure</p>
+</div>
+
+<div class="stat">
+<h2>Fast</h2>
+<p>Delivery</p>
+</div>
+
+<div class="stat">
+<h2>∞</h2>
+<p>Possibilities</p>
+</div>
+
+</div>
+
+</section>
+
+<section class="discord" id="support">
+
+<h2 class="title">Need Help?</h2>
+
+<p>
+Join our Discord server for support and updates.
+</p>
+
+<a href="#">Join Discord</a>
+
+</section>
+
 <footer>
-© 2025 QZMarket
+© 2025 QZMarket. All Rights Reserved.
 </footer>
+
 </body>
 </html>
